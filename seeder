@@ -1,0 +1,21 @@
+#!/usr/bin/env php
+<?php
+// application.php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+
+$application->add(new \Irelance\Torrent\Command\Kernel());
+$application->add(new \Irelance\Torrent\Command\Tracker\Http());
+$application->add(new \Irelance\Torrent\Command\Output());
+
+try {
+    $application->run();
+} catch (\Exception $e) {
+    echo $e->getMessage();
+} catch (\Error $e) {
+    echo $e->getMessage();
+}
